@@ -1,7 +1,7 @@
 "use client";
 
 import { Image } from "react-bootstrap";
-import { Link } from "@mui/material";
+import Link from "next/link";
 
 export default function Login() {
   return (
