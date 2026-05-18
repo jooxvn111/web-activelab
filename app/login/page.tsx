@@ -2,70 +2,104 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Image } from "react-bootstrap";
+import Image from "next/image"; 
+import "./login.css"; 
 
 export default function Login() {
   const router = useRouter();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  // 👉 DI SINI handleLogin
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState<{ type: "error" | "success"; message: string } | null>(null);
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setAlert(null);
+    setLoading(true);
 
-    // LOGIN DUMMY
+    await new Promise((res) => setTimeout(res, 1200));
+    setLoading(false);
+
     if (username === "admin" && password === "admin") {
-      localStorage.setItem("token", "dummy-token");
-      router.push("/dashboard");
+      setAlert({ type: "success", message: "Login successful! Redirecting..." });
+      setTimeout(() => {
+        localStorage.setItem("token", "dummy-token");
+        router.push("/dashboard");
+      }, 800);
     } else {
-      alert("Username / Password salah");
+      setAlert({ type: "error", message: "Username or password is incorrect." });
+      setPassword("");
     }
   };
 
   return (
-    <div className="admin-gradient min-vh-100 d-flex flex-column justify-content-center align-items-center">
-      
-      <div className="mb-3">
-        <Image 
-          src="/images/logo_activelab.png" 
-          alt="Logo ActiveLab"
-          width={120}
-          height={120}
-        />
-      </div>
+    <>
+      <div className="login-wrapper">
+        <div className="bg-orb bg-orb-1" />
+        <div className="bg-orb bg-orb-2" />
+        <div className="bg-orb bg-orb-3" />
 
-      <div className="bg-white p-4 rounded shadow" style={{ width: "300px" }}>
-        <h4 className="text-center mb-3">Login Admin</h4>
-
-        {/* 👉 PENTING: pakai onSubmit */}
-        <form onSubmit={handleLogin}>
-
-          <div className="mb-3">
-            <label className="form-label">Username</label>
-            <input 
-              type="text" 
-              className="form-control"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+        <div className="login-card">
+          <div className="logo-wrap">
+            <div className="logo-box">
+              <Image 
+                src="/images/logo_activelab.png" 
+                alt="ActiveLab Logo" 
+                width={50} 
+                height={50} 
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            <p className="logo-title">Welcome Back</p>
+            <p className="logo-sub">ActiveLab Admin Panel</p>
           </div>
 
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input 
-              type="password" 
-              className="form-control"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          {alert && (
+            <div className={`alert-box ${alert.type === "error" ? "alert-error" : "alert-success"}`}>
+              {alert.message}
+            </div>
+          )}
 
-          <button type="submit" className="btn btn-primary w-100">
-            Submit
-          </button>
-        </form>
+          <form onSubmit={handleLogin}>
+            <div className="field-wrap">
+              <label className="field-label">Username</label>
+              <input
+                type="text"
+                className="field-input"
+                placeholder="Enter your username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="field-wrap">
+              <label className="field-label">Password</label>
+              <input
+                type="password"
+                className="field-input"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="btn-signin"
+              disabled={loading}
+            >
+              {loading ? "Signing in..." : "Sign In"}
+            </button>
+          </form>
+
+          <div className="divider">
+            <div className="divider-line" />
+            <span className="divider-text">secured by ActiveLab</span>
+            <div className="divider-line" />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

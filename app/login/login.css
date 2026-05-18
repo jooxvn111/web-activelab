@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap');
+
+        .login-wrapper {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+          font-family: 'Sora', sans-serif;
+          background: #0a0e1a;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .bg-orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(60px);
+          opacity: 0.25;
+          animation: float 8s ease-in-out infinite;
+        }
+        .bg-orb-1 { width: 350px; height: 350px; background: #3b82f6; top: -100px; right: -80px; animation-delay: 0s; }
+        .bg-orb-2 { width: 280px; height: 280px; background: #6366f1; bottom: -80px; left: -60px; animation-delay: -3s; }
+        .bg-orb-3 { width: 200px; height: 200px; background: #0ea5e9; top: 50%; left: 30%; animation-delay: -5s; }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        .login-card {
+          background: rgba(255,255,255,0.04);
+          border: 0.5px solid rgba(255,255,255,0.12);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          border-radius: 20px;
+          padding: 2.5rem 2rem;
+          width: 100%;
+          max-width: 400px;
+          position: relative;
+          z-index: 2;
+          animation: cardIn 0.7s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        @keyframes cardIn {
+          from { opacity: 0; transform: translateY(32px) scale(0.97); }
+          to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .logo-wrap {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 1.75rem;
+          animation: fadeDown 0.6s 0.15s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        @keyframes fadeDown {
+          from { opacity: 0; transform: translateY(-16px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-box {
+          width: 64px; height: 64px;
+          background: #ffffff;
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1rem;
+          position: relative;
+          padding: 8px;
+        }
+
+        .logo-box::after {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          border-radius: 17px;
+          background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+          z-index: -1;
+          filter: blur(10px);
+        }
+
+        .logo-title {
+          font-size: 18px;
+          font-weight: 600;
+          color: #fff;
+          letter-spacing: -0.3px;
+          margin-bottom: 2px;
+        }
+
+        .logo-sub {
+          font-size: 12px;
+          color: rgba(255,255,255,0.4);
+          font-weight: 300;
+          letter-spacing: 0.4px;
+          text-transform: uppercase;
+        }
+
+        .field-label {
+          display: block;
+          font-size: 11px;
+          font-weight: 500;
+          color: rgba(255,255,255,0.45);
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+          margin-bottom: 6px;
+        }
+
+        .field-wrap {
+          position: relative;
+          margin-bottom: 12px;
+          animation: fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) both;
+        }
+        .field-wrap:nth-of-type(1) { animation-delay: 0.25s; }
+        .field-wrap:nth-of-type(2) { animation-delay: 0.35s; }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(14px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .field-input {
+          width: 100%;
+          background: rgba(255,255,255,0.06);
+          border: 0.5px solid rgba(255,255,255,0.1);
+          border-radius: 10px;
+          padding: 11px 14px;
+          font-size: 14px;
+          font-family: 'Sora', sans-serif;
+          color: #fff;
+          outline: none;
+          transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+
+        .field-input::placeholder { color: rgba(255,255,255,0.2); }
+
+        .field-input:focus {
+          border-color: rgba(99,102,241,0.6);
+          background: rgba(99,102,241,0.08);
+          box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+        }
+
+        .btn-signin {
+          width: 100%;
+          padding: 12px;
+          font-size: 14px;
+          font-weight: 500;
+          font-family: 'Sora', sans-serif;
+          color: #fff;
+          background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          letter-spacing: 0.3px;
+          margin-top: 4px;
+          transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+          animation: fadeUp 0.55s 0.45s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        .btn-signin:hover:not(:disabled) {
+          opacity: 0.9;
+          transform: translateY(-1px);
+          box-shadow: 0 8px 24px rgba(99,102,241,0.35);
+        }
+        .btn-signin:active:not(:disabled) { transform: scale(0.98); }
+        .btn-signin:disabled { opacity: 0.65; cursor: not-allowed; }
+
+        .alert-box {
+          padding: 10px 12px;
+          border-radius: 8px;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 12px;
+          animation: shake 0.4s ease;
+        }
+        .alert-error {
+          background: rgba(239,68,68,0.12);
+          border: 0.5px solid rgba(239,68,68,0.25);
+          color: #fca5a5;
+        }
+        .alert-success {
+          background: rgba(16,185,129,0.12);
+          border: 0.5px solid rgba(16,185,129,0.25);
+          color: #6ee7b7;
+        }
+
+        @keyframes shake {
+          0%,100% { transform: translateX(0); }
+          25% { transform: translateX(-6px); }
+          75% { transform: translateX(6px); }
+        }
+
+        .divider {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin: 1.25rem 0 0;
+          animation: fadeUp 0.55s 0.5s cubic-bezier(0.16,1,0.3,1) both;
+        }
+        .divider-line { flex: 1; height: 0.5px; background: rgba(255,255,255,0.08); }
+        .divider-text { font-size: 11px; color: rgba(255,255,255,0.25); white-space: nowrap; }
